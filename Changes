@@ -2,5 +2,8 @@ Revision history for Slangify
 
 {{$NEXT}}
 
+0.0.2  2023-09-23T17:34:40+02:00
+    - Add support for legacy grammar / actions handling
+
 0.0.1  2023-09-21T19:00:30+02:00
     - Initial version

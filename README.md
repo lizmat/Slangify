@@ -10,17 +10,25 @@ SYNOPSIS
 
 ```raku
 # Code of a slang module with only a grammar change
-role Grammar { ... }
-use Slangify Grammar, Mu;
+role Foo::Grammar { ... }
+use Slangify Foo::Grammar, Mu;
 
 # Code of a slang module with both grammar and actions
-role Grammar { ... }
-role Actions { ... }
-use Slangify Grammar, Actions;
+role Foo::Grammar { ... }
+role Foo::Actions { ... }
+use Slangify Foo::Grammar, Foo::Actions;
 
 # Code of a slang module with only an actions change
-role Actions { ... }
-use Slangify Mu, Actions;
+role Foo::Actions { ... }
+use Slangify Mu, Foo::Actions;
+
+# code of a slang module with legacy grammar
+role Foo::Grammar { ... }
+role Foo::Actions { ... }
+role Foo::Grammar::Legacy { ... }
+role Foo::Actions::Legacy { ... }
+use Slangify Foo::Grammar, Foo::Actions,
+  Foo::Grammar::Legacy, Foo::Actions::Legacy;
 ```
 
 DESCRIPTION
@@ -33,6 +41,8 @@ It abstracts the internals of slang creation and activation so that module devel
 This module is **only** needed to install a module that provides a slang. And as such, would only need to be specified in the `build-depends` section of the META information.
 
 Note that the absence of a grammar role or an actions role, can be indicated by specifying `Mu`. Sadly, some core ideosyncracies make it currently impossible to indicate no change otherwise.
+
+If the given grammar / actions can work with both the legacy grammar, as well as with the new RakuAST based grammar, then no changes are needed. If there **is** a different grammar for the legacy grammar and/or actions for the legacy grammar, then you can specify these as the 3rd and 4th argument in the `use Slangify` statement.
 
 AUTHOR
 ======

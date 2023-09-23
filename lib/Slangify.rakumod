@@ -1,19 +1,30 @@
 # Interface to activate slangs at compile time inside slang modules
 
-sub EXPORT(Mu $grammar, Mu $actions) {
+sub EXPORT(
+  Mu $grammar  is copy,
+  Mu $actions? is copy,
+  Mu $legacy-grammar?,
+  Mu $legacy-actions?
+) {
 
     # The EXPORT sub that actually does the slanging
     my sub EXPORT() {
         my $LANG := $*LANG;
-        $LANG.define_slang(
-          'MAIN',
+
+        unless $LANG.^name.starts-with('Raku::') {
+            $grammar := $legacy-grammar unless $legacy-grammar<> =:= Mu;
+            $actions := $legacy-actions unless $legacy-actions<> =:= Mu;
+        }
+
+        $LANG.define_slang('MAIN',
           $grammar<> =:= Mu
             ?? $LANG.slang_grammar('MAIN')
-            !! $LANG.slang_grammar('MAIN').^mixin($grammar),
+            !! $LANG.slang_grammar('MAIN').^mixin($grammar<>),
           $actions<> =:= Mu
             ?? $LANG.slang_actions('MAIN')
-            !! $LANG.slang_actions('MAIN').^mixin($actions)
+            !! $LANG.slang_actions('MAIN').^mixin($actions<>)
         );
+
         BEGIN Map.new
     }
 
@@ -32,17 +43,25 @@ Slangify - Provide an easy interface to activating slangs
 =begin code :lang<raku>
 
 # Code of a slang module with only a grammar change
-role Grammar { ... }
-use Slangify Grammar, Mu;
+role Foo::Grammar { ... }
+use Slangify Foo::Grammar, Mu;
 
 # Code of a slang module with both grammar and actions
-role Grammar { ... }
-role Actions { ... }
-use Slangify Grammar, Actions;
+role Foo::Grammar { ... }
+role Foo::Actions { ... }
+use Slangify Foo::Grammar, Foo::Actions;
 
 # Code of a slang module with only an actions change
-role Actions { ... }
-use Slangify Mu, Actions;
+role Foo::Actions { ... }
+use Slangify Mu, Foo::Actions;
+
+# code of a slang module with legacy grammar
+role Foo::Grammar { ... }
+role Foo::Actions { ... }
+role Foo::Grammar::Legacy { ... }
+role Foo::Actions::Legacy { ... }
+use Slangify Foo::Grammar, Foo::Actions,
+  Foo::Grammar::Legacy, Foo::Actions::Legacy;
 
 =end code
 
@@ -61,6 +80,12 @@ C<build-depends> section of the META information.
 Note that the absence of a grammar role or an actions role, can be
 indicated by specifying C<Mu>.  Sadly, some core ideosyncracies make
 it currently impossible to indicate no change otherwise.
+
+If the given grammar / actions can work with both the legacy grammar,
+as well as with the new RakuAST based grammar, then no changes are
+needed.  If there B<is> a different grammar for the legacy grammar
+and/or actions for the legacy grammar, then you can specify these as
+the 3rd and 4th argument in the C<use Slangify> statement.
 
 =head1 AUTHOR
 
