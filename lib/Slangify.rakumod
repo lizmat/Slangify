@@ -28,8 +28,19 @@ sub EXPORT(
         BEGIN Map.new
     }
 
+    multi sub postcircumfix:<{ }>(Mu $/, Str:D $key) {
+        $/.hash.AT-KEY($key)
+    }
+    multi sub prefix:<~>(Mu $/) {
+        $/.Str
+    }
+
     # Export the EXPORT sub that does the slanging
-    Map.new: ('&EXPORT' => &EXPORT)
+    Map.new: (
+      '&EXPORT'              => &EXPORT,
+      '&prefix:<~>'          => &prefix:<~>,
+      '&postcircumfix:<{ }>' => &postcircumfix:<{ }>
+    )
 }
 
 =begin pod
@@ -87,6 +98,14 @@ needed.  If there B<is> a different grammar for the legacy grammar
 and/or actions for the legacy grammar, then you can specify these as
 the 3rd and 4th argument in the C<use Slangify> statement.
 
+=head1 ADDITIONAL EXPORTS
+
+The C<Slangify> module also exports special candidates for postcircumfix
+C<{ }> and for prefix C<~>.  This allows slang developers to remain
+closer to original grammar code which is often living in NQP land, e.g.:
+C<~$<identifier> eq 'foo'>.  Without these special candidates, slang
+developers would need to resort to using NQP ops.
+
 =head1 AUTHOR
 
 Elizabeth Mattijsen <liz@raku.rocks>
@@ -105,3 +124,5 @@ Copyright 2023 Elizabeth Mattijsen
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
 =end pod
+
+# vim: expandtab shiftwidth=4

@@ -44,6 +44,11 @@ Note that the absence of a grammar role or an actions role, can be indicated by 
 
 If the given grammar / actions can work with both the legacy grammar, as well as with the new RakuAST based grammar, then no changes are needed. If there **is** a different grammar for the legacy grammar and/or actions for the legacy grammar, then you can specify these as the 3rd and 4th argument in the `use Slangify` statement.
 
+ADDITIONAL EXPORTS
+==================
+
+The `Slangify` module also exports special candidates for postcircumfix `{ }` and for prefix `~`. This allows slang developers to remain closer to original grammar code which is often living in NQP land, e.g.: `~$<identifier> eq 'foo'`. Without these special candidates, slang developers would need to resort to using NQP ops.
+
 AUTHOR
 ======
 

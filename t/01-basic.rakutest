@@ -9,3 +9,5 @@ sub pass?(|c) { pass |c }
 
 plan 1;
 pass? "Successfully slanged";
+
+# vim: expandtab shiftwidth=4

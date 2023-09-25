@@ -1,6 +1,9 @@
 my role Piersing {
     token identifier {
-        <.ident> [ <.apostrophe> <.ident> ]* <[?!]>?
+        <ident>
+        { ~$<ident> }  # just to check it runs ok
+        [ <.apostrophe> <.ident> ]*
+        <[?!]>?
     }
 
     token name {
@@ -13,3 +16,5 @@ my role Piersing {
 }
 
 use Slangify Piersing, Mu;
+
+# vim: expandtab shiftwidth=4

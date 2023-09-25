@@ -2,6 +2,10 @@ Revision history for Slangify
 
 {{$NEXT}}
 
+0.0.3  2023-09-25T17:06:46+02:00
+    - Also export postcircumfix:<{ }>(Mu,$key) and prefix:<~>(Mu)
+      candidates, allowing the idiom ~$<foo> to work.
+
 0.0.2  2023-09-23T17:34:40+02:00
     - Add support for legacy grammar / actions handling
 
