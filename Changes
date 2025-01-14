@@ -1,6 +1,8 @@
 Revision history for Slangify
 
 {{$NEXT}}
+    - Add CI badge for each OS
+    - Update copyright year
 
 0.0.3  2023-09-25T17:06:46+02:00
     - Also export postcircumfix:<{ }>(Mu,$key) and prefix:<~>(Mu)

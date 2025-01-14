@@ -1,8 +1,8 @@
 use Test::Coverage;
 
-coverage-at-least 200/3;
+coverage-at-least 83;
 
-uncovered-at-most 5;
+uncovered-at-most 2;
 
 source-with-coverage;
 
