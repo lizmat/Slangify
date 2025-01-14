@@ -1,5 +1,7 @@
 use Test::Coverage;
 
+plan 2;
+
 coverage-at-least 83;
 
 uncovered-at-most 2;

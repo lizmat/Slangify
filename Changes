@@ -1,6 +1,8 @@
 Revision history for Slangify
 
 {{$NEXT}}
+
+0.0.4  2025-01-14T22:36:11+01:00
     - Add CI badge for each OS
     - Update copyright year
 
