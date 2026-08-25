@@ -7,7 +7,6 @@ Slangify - Provide an easy interface to activating slangs
 =head1 SYNOPSIS
 
 =begin code :lang<raku>
-
 # Code of a slang module with only a grammar change
 role Foo::Grammar { ... }
 use Slangify Foo::Grammar, Mu;
@@ -28,7 +27,6 @@ role Foo::Grammar::Legacy { ... }
 role Foo::Actions::Legacy { ... }
 use Slangify Foo::Grammar, Foo::Actions,
   Foo::Grammar::Legacy, Foo::Actions::Legacy;
-
 =end code
 
 =head1 DESCRIPTION
@@ -74,7 +72,7 @@ deal to me!
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2023, 2025 Elizabeth Mattijsen
+Copyright 2023, 2025, 2026 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
