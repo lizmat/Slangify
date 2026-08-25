@@ -1,6 +1,8 @@
 Revision history for Slangify
 
 {{$NEXT}}
+
+0.0.5  2026-08-25T19:32:24+02:00
     - Add full coverage testing
     - Modernize META
     - Update copyright year

@@ -16,11 +16,11 @@
   "raku": "6.d",
   "resources": [
   ],
-  "source-url": "https://github.com/lizmat/Slangify.git",
+  "source-url": "https://codeberg.org/lizmat/Slangify.git",
   "support": {
-    "bugtracker": "https://github.com/lizmat/Slangify/issues",
+    "bugtracker": "https://codeberg.org/lizmat/Slangify/issues",
     "email": "liz@raku.rocks",
-    "source": "https://github.com/lizmat/Slangify.git"
+    "source": "https://codeberg.org/lizmat/Slangify.git"
   },
   "tags": [
     "SLANG",
@@ -28,5 +28,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.4"
+  "version": "0.0.5"
 }
